@@ -8,9 +8,14 @@ app.use(express.json());
 
 app.use("/tasks", taskRouter);
 
+
 app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err); // Let Express handle the already-sent response
+  }
+
   if (err.status && err.message && err.errors) {
-    res.status(err.status).json({
+    return res.status(err.status).json({
       message: err.message,
       errors: err.errors,
     });
@@ -22,7 +27,7 @@ app.use((err, req, res, next) => {
     });
   }
 
-  res.status(500).json({ message: "Internal Server Error" });
+  return res.status(500).json({ message: "Internal Server Error" });
 });
 
 export default app;

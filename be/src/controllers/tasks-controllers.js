@@ -16,6 +16,20 @@ class TaskController {
       next(error);
     }
   }
+
+  async getAllTasks(req, res, next) {
+    try {
+      const tasks = await TaskModel.fetchAllTasks();
+
+      if (tasks.length === 0) {
+        return next({ status: 404, message: "Task not found" });
+      }
+
+      res.status(200).json(tasks);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new TaskController();
