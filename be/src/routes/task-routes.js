@@ -17,4 +17,10 @@ taskRouter.get(
 
 taskRouter.get("/", TaskController.getAllTasks);
 
+taskRouter.patch(
+  "/:id",
+  TaskMiddleware.validateTaskIdParam,
+  TaskMiddleware.validateStatusUpdate,
+  TaskController.updateStatus
+);
 export default taskRouter;

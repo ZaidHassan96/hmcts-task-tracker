@@ -48,6 +48,27 @@ class TaskMiddleware {
       next();
     },
   ];
+
+  validateStatusUpdate = [
+    body("status")
+      .notEmpty()
+      .withMessage("Status is required")
+      .isLength({ max: 50 })
+      .withMessage("status should not exceed 50 characters"),
+
+    (req, res, next) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return next({
+          status: 400,
+          message: "Validation failed",
+          errors: errors.array(),
+        });
+      }
+
+      next();
+    },
+  ];
 }
 
 export default new TaskMiddleware();
