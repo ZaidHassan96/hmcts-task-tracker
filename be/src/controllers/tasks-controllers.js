@@ -45,6 +45,22 @@ class TaskController {
       next(error);
     }
   }
+
+  async updateStatus(req, res, next) {
+    try {
+      const taskId = req.params.id;
+      const { status } = req.body;
+      const task = await TaskModel.patchStatus(taskId, status);
+
+      if (!task) {
+        return next({ status: 404, message: "Task not found" });
+      }
+
+      res.status(200).json({ message: "Status updated", task });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new TaskController();

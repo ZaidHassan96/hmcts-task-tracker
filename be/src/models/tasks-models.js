@@ -38,6 +38,20 @@ class TaskModel {
       throw new Error("Database error");
     }
   }
+
+  static async patchStatus(taskId, status) {
+    try {
+      const result = await db.query(
+        "UPDATE tasks SET status = $1 WHERE id = $2 RETURNING *",
+        [status, taskId]
+      );
+
+      return result.rows[0];
+    } catch (error) {
+      console.error("Error updating:", error);
+      throw new Error("Database error");
+    }
+  }
 }
 
 export default TaskModel;
