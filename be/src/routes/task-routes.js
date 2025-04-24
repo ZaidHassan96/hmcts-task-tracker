@@ -23,4 +23,10 @@ taskRouter.patch(
   TaskMiddleware.validateStatusUpdate,
   TaskController.updateStatus
 );
+
+taskRouter.delete(
+  "/:id",
+  TaskMiddleware.validateTaskIdParam,
+  TaskController.removeTask
+);
 export default taskRouter;

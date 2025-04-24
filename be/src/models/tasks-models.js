@@ -12,8 +12,11 @@ class TaskModel {
 
       return result.rows[0];
     } catch (error) {
-      console.error("Error fetching Posting task:", error);
-      throw new Error("Database error");
+      console.error("Failed to post task", error);
+      throw {
+        status: 500,
+        message: "Failed to post task",
+      };
     }
   }
 
@@ -24,8 +27,11 @@ class TaskModel {
       ]);
       return result.rows[0];
     } catch (error) {
-      console.error("Error fetching task by id:", error);
-      throw new Error("Database error");
+      console.error("Failed to get task", error);
+      throw {
+        status: 500,
+        message: "Failed to get task",
+      };
     }
   }
 
@@ -34,8 +40,11 @@ class TaskModel {
       const result = await db.query("SELECT * FROM tasks;");
       return result.rows;
     } catch (error) {
-      console.error("Error fetching all tasks:", error);
-      throw new Error("Database error");
+      console.error("Failed to get all task", error);
+      throw {
+        status: 500,
+        message: "Failed to get all tasks",
+      };
     }
   }
 
@@ -48,8 +57,27 @@ class TaskModel {
 
       return result.rows[0];
     } catch (error) {
-      console.error("Error updating:", error);
-      throw new Error("Database error");
+      console.error("Failed to update task", error);
+      throw {
+        status: 500,
+        message: "Failed to update task",
+      };
+    }
+  }
+
+  static async deleteTask(taskId) {
+    try {
+      const result = await db.query(
+        "DELETE FROM tasks WHERE id = $1 RETURNING *",
+        [taskId]
+      );
+      return result.rows[0];
+    } catch (error) {
+      console.error("Failed to delete task", error);
+      throw {
+        status: 500,
+        message: "Failed to delete task",
+      };
     }
   }
 }
