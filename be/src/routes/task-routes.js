@@ -3,11 +3,11 @@ import TaskController from "../controllers/tasks-controllers.js";
 import TaskMiddleware from "../middlewares/tasks-middlewares.js";
 const taskRouter = express.Router();
 
-
-taskRouter.post("/",
-    TaskController
-
-)
+taskRouter.post(
+  "/",
+  TaskMiddleware.validateCreateTask,
+  TaskController.uploadTask
+);
 
 taskRouter.get(
   "/:id",
@@ -16,7 +16,5 @@ taskRouter.get(
 );
 
 taskRouter.get("/", TaskController.getAllTasks);
-
-
 
 export default taskRouter;

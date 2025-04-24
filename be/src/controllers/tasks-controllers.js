@@ -1,6 +1,21 @@
 import TaskModel from "../models/tasks-models.js";
 
 class TaskController {
+  async uploadTask(req, res, next) {
+    try {
+      const { title, description, status, due_date } = req.body;
+      const task = await TaskModel.postTask(
+        title,
+        description,
+        status,
+        due_date
+      );
+
+      res.status(201).json({ message: "Task uploaded successfuly", task });
+    } catch (error) {
+      next(error);
+    }
+  }
   async getTaskById(req, res, next) {
     try {
       const taskId = req.params.id;

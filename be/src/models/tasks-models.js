@@ -3,7 +3,19 @@ import { pool } from "../config/db.js";
 const db = pool;
 
 class TaskModel {
-  static async postTask(title, description, status) {}
+  static async postTask(title, description, status, due_date) {
+    try {
+      const result = await db.query(
+        "INSERT INTO tasks (title, description, status, due_date) VALUES ($1, $2, $3, $4)",
+        [title, description, status, due_date]
+      );
+
+      return result.rows[0];
+    } catch (error) {
+      console.error("Error fetching Posting task:", error);
+      throw new Error("Database error");
+    }
+  }
 
   static async fetchTaskById(taskId) {
     try {
