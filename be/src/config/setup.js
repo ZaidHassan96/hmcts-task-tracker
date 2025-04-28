@@ -7,13 +7,18 @@ const createDatabase = async (dbName) => {
       database: "postgres", // Connect to the default "postgres" database to create/drop other databases
     });
 
-    // First, drop the database if it exists
-    const dropDbQuery = `DROP DATABASE IF EXISTS ${dbName};`;
-    await tempPool.query(dropDbQuery);
+    // Check if the database already exists
+    const checkDbQuery = `SELECT 1 FROM pg_database WHERE datname = '${dbName}';`;
+    const result = await tempPool.query(checkDbQuery);
 
-    // Now, create the database
-    const createDbQuery = `CREATE DATABASE ${dbName};`;
-    await tempPool.query(createDbQuery);
+    if (result.rows.length === 0) {
+      // Database doesn't exist, so create it
+      const createDbQuery = `CREATE DATABASE ${dbName};`;
+      await tempPool.query(createDbQuery);
+      console.log(`✅ Database '${dbName}' created successfully.`);
+    } else {
+      console.log(`✅ Database '${dbName}' already exists.`);
+    }
 
     // Close the temporary connection
     await tempPool.end();

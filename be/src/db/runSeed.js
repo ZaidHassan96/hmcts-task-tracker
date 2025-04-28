@@ -2,7 +2,7 @@ import { pool } from "../config/db.js"; // Use the pool to close the DB connecti
 import tasks from "./data.js"; // Your data array
 import Seeder from "./seed.js";
 
-const runSeed = async () => {
+export const runSeed = async () => {
   try {
     await Seeder.createTable();
     await Seeder.seed(tasks);

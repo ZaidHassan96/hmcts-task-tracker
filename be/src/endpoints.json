@@ -1,0 +1,86 @@
+{
+  "endpoints": [
+    {
+      "method": "POST",
+      "url": "/tasks",
+      "description": "Create a task",
+      "requestBody": {
+        "title": "string, required",
+        "description": "string, optional",
+        "status": "string, required (e.g., 'pending', 'completed')",
+        "due_date": "string (ISO 8601 format), required"
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "id": "integer, task ID",
+          "title": "string",
+          "description": "string",
+          "status": "string",
+          "due_date": "string (ISO 8601 format)"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "url": "/tasks",
+      "description": "Retrieve all tasks",
+      "response": {
+        "status": 200,
+        "body": [
+          {
+            "id": "integer, task ID",
+            "title": "string",
+            "description": "string",
+            "status": "string",
+            "due_date": "string (ISO 8601 format)"
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "url": "/tasks/:id",
+      "description": "Retrieve a task by ID",
+      "response": {
+        "status": 200,
+        "body": {
+          "id": "integer, task ID",
+          "title": "string",
+          "description": "string",
+          "status": "string",
+          "due_date": "string (ISO 8601 format)"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "url": "/tasks/:id",
+      "description": "Update the status of a task",
+      "requestBody": {
+        "status": "string, required (e.g., 'pending', 'completed')"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "id": "integer, task ID",
+          "title": "string",
+          "description": "string",
+          "status": "string",
+          "due_date": "string (ISO 8601 format)"
+        }
+      }
+    },
+    {
+      "method": "DELETE",
+      "url": "/tasks/:id",
+      "description": "Delete a task",
+      "response": {
+        "status": 200,
+        "body": {
+          "message": "Task deleted successfully"
+        }
+      }
+    }
+  ]
+}
