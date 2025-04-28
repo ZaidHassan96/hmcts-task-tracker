@@ -14,6 +14,17 @@ const CreateTask = ({ setShowCreateForm }) => {
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+  const dateValidator = (dueDate) => {
+    const today = new Date();
+    const inputDate = new Date(dueDate);
+
+    // Set both to start of day to ignore time part
+    today.setHours(0, 0, 0, 0);
+    inputDate.setHours(0, 0, 0, 0);
+
+    return inputDate < today;
+  };
+
   const handleSubmit = async (e) => {
     try {
       e.preventDefault(); // Prevents the default form submission
@@ -24,11 +35,11 @@ const CreateTask = ({ setShowCreateForm }) => {
       const newErrors = {};
 
       if (title.length === 0) {
-        newErrors.title = "Title is required";
+        newErrors.title = "Title is required.";
       }
 
-      if (!dueDate) {
-        newErrors.dueDate = "Due Date is required";
+      if (!dueDate || dateValidator(dueDate)) {
+        newErrors.dueDate = "Due Date is required (cannot select a past date).";
       }
 
       // If there are any errors, set them and stop submission

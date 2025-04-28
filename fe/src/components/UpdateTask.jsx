@@ -6,6 +6,14 @@ const UpdateTask = ({ setSettingsButton, id, setTasks, tasks }) => {
   const [updateStatus, setUpdateStatus] = useState(false);
 
   const deleteTask = async (id) => {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this task?"
+    );
+
+    if (!shouldDelete) {
+      return;
+    }
+
     const prevTasks = tasks;
     setTasks((tasks) => tasks.filter((task) => task.id !== id)); // optimistic UI
 
@@ -17,7 +25,7 @@ const UpdateTask = ({ setSettingsButton, id, setTasks, tasks }) => {
       setSettingsButton((prev) => !prev);
     } catch (error) {
       console.error("Error", error);
-      setTasks(prevTasks);
+      setTasks(prevTasks); // rollback in case of failure
     }
   };
 

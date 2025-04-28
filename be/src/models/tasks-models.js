@@ -6,7 +6,7 @@ class TaskModel {
   static async postTask(title, description, status, due_date) {
     try {
       const result = await db.query(
-        "INSERT INTO tasks (title, description, status, due_date) VALUES ($1, $2, $3, $4)",
+        "INSERT INTO tasks (title, description, status, due_date) VALUES ($1, $2, $3, $4) RETURNING *",
         [title, description, status, due_date]
       );
 
