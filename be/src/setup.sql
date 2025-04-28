@@ -1,6 +1,8 @@
 DROP DATABASE IF EXISTS task_manager_db;
+DROP DATABASE IF EXISTS test_task_manager_db;
 
 CREATE DATABASE task_manager_db;
+CREATE DATABASE test_task_manager_db;
 
 
 DROP TABLE IF EXISTS tasks;
@@ -13,3 +15,5 @@ CREATE TABLE tasks (
   status VARCHAR(50) NOT NULL, 
   due_date TIMESTAMP  
 );
+
+

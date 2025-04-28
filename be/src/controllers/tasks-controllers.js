@@ -25,7 +25,7 @@ class TaskController {
         return next({ status: 404, message: "Task not found" });
       }
 
-      res.status(200).json(task);
+      res.status(200).json({ message: "Task fetched successfuly", task });
     } catch (error) {
       console.error("Error fetching task by id", error);
       next(error);

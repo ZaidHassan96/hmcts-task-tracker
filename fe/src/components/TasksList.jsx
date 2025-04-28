@@ -10,7 +10,9 @@ const TasksList = ({ setShowCreateForm }) => {
   const fetchTasks = async () => {
     try {
       const response = await axios.get("http://localhost:9090/tasks/");
-      setTasks(response.data);
+      const allTasks = response.data;
+      allTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
+      setTasks(allTasks);
     } catch (error) {
       console.error("Error", error);
     }
