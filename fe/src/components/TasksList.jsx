@@ -36,7 +36,7 @@ const TasksList = ({ setShowCreateForm }) => {
   };
 
   return (
-    <div className="bg-gray-900 p-14">
+    <div className="bg-gray-900 p-4 sm:p-8 md:p-10 lg:p-14">
       <p
         onClick={() => setShowCreateForm((prev) => !prev)}
         className="text-right mb-8 text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-200"
@@ -44,11 +44,11 @@ const TasksList = ({ setShowCreateForm }) => {
         Create Task +
       </p>
       <div>
-        <ul className="bg-gray-800 divide-y divide-gray-700 text-white rounded-lg p-4 ">
+        <ul className="bg-gray-800 divide-y divide-gray-700 text-white rounded-lg p-2 sm:p-4">
           {/* Check if tasks exist */}
           {tasks.length > 0 ? (
             tasks.map((task, index) => (
-              <li key={index} className="py-2 list-none mb-8">
+              <li key={index} className="py-2 list-none mb-4 sm:mb-8">
                 <div className="flex justify-between">
                   <h1 className="text-xl font-bold ml-6">{task.title}</h1>
                   <StatusButton
@@ -58,7 +58,9 @@ const TasksList = ({ setShowCreateForm }) => {
                   />
                 </div>
 
-                <p className="text-left ml-6 mt-8 mb-4">{task.description}</p>
+                <p className="text-left ml-2 sm:ml-6 mt-4 sm:mt-8 mb-2 sm:mb-4">
+                  {task.description}
+                </p>
                 <div className="flex justify-between">
                   <span className="text-s text-gray-400 flex items-center ml-6">
                     <svg
@@ -79,7 +81,7 @@ const TasksList = ({ setShowCreateForm }) => {
                   </span>
 
                   <span
-                    className={`px-3 py-1 w-40 font-medium rounded-full ${getStatusBadgeClass(
+                    className={`px-3 py-1 sm:w-32 md:w-36 lg:w-40 font-medium rounded-full  ${getStatusBadgeClass(
                       task.status
                     )}`}
                   >

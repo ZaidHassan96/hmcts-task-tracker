@@ -24,22 +24,22 @@ const UpdateStatus = ({ id, setTasks, tasks, setSettingsButton }) => {
     }
   };
   return (
-    <div class="flex flex-col absolute right-0 bg-gray-800  w-40">
+    <div className="flex flex-col absolute right-0 z-10 bg-gray-800 w-32 sm:w-40 p-1 rounded shadow-lg mt-2">
       <button
         onClick={() => changeStatus(id, "Pending")}
-        className="p-1 bg-gray-500 hover:bg-gray-600 hover:cursor-pointer text-white rounded-full mb-1"
+        className="p-1 text-xs sm:text-sm bg-gray-500 hover:bg-gray-600 hover:cursor-pointer text-white rounded-full mb-1"
       >
         Pending
       </button>
       <button
         onClick={() => changeStatus(id, "In Progress")}
-        className="p-1 bg-orange-500 hover:bg-orange-600 hover:cursor-pointer text-white rounded-full mb-1"
+        className="p-1 text-xs sm:text-sm bg-orange-500 hover:bg-orange-600 hover:cursor-pointer text-white rounded-full mb-1"
       >
         In Progess
       </button>
       <button
         onClick={() => changeStatus(id, "Complete")}
-        className="p-1 bg-green-600 hover:bg-green-700 hover:cursor-pointer text-white rounded-full "
+        className="p-1 text-xs sm:text-sm bg-green-600 hover:bg-green-700 hover:cursor-pointer text-white rounded-full"
       >
         Complete
       </button>
