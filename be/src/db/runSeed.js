@@ -4,9 +4,9 @@ import Seeder from "./seed.js";
 
 const runSeed = async () => {
   try {
-    await Seeder.createDatabase();
     await Seeder.createTable();
     await Seeder.seed(tasks);
+    console.log("Seed Succesfull");
   } catch (error) {
     console.error("Error occurred during seeding:", error.message);
   } finally {

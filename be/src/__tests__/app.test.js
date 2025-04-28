@@ -5,7 +5,6 @@ import { pool } from "../config/db.js";
 
 // Seed the test database before running any tests
 beforeAll(async () => {
-  await Seeder.createDatabase();
   await Seeder.createTable(); // Ensures the table is created afresh
   await Seeder.seed([
     // Seed test data

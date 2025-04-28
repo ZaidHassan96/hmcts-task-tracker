@@ -1,19 +1,11 @@
-DROP DATABASE IF EXISTS task_manager_db;
-DROP DATABASE IF EXISTS test_task_manager_db;
 
-CREATE DATABASE task_manager_db;
-CREATE DATABASE test_task_manager_db;
+-- Connect to the default postgres database
+\c postgres;
 
+-- Drop databases dynamically
+DROP DATABASE IF EXISTS task_manager_dbs;
+DROP DATABASE IF EXISTS task_manager_dbs;
 
-DROP TABLE IF EXISTS tasks;
-
-
-CREATE TABLE tasks (
-  id SERIAL PRIMARY KEY,       
-  title VARCHAR(100) NOT NULL,  
-  description TEXT,            
-  status VARCHAR(50) NOT NULL, 
-  due_date TIMESTAMP  
-);
-
-
+-- Create databases dynamically
+CREATE DATABASE task_manager_dbs;
+CREATE DATABASE task_manager_dbs;
